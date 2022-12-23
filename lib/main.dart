@@ -1,9 +1,13 @@
-
 import 'package:all_firebase_auth/auth_screen.dart';
 import 'package:all_firebase_auth/constants.dart';
+import 'package:all_firebase_auth/resources/auth_method.dart';
+import 'package:all_firebase_auth/widgets/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -17,7 +21,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
         //define our text field style
         inputDecorationTheme: InputDecorationTheme(
@@ -26,10 +29,24 @@ class MyApp extends StatelessWidget {
           border: InputBorder.none,
           hintStyle: TextStyle(color: Colors.white),
           contentPadding: EdgeInsets.symmetric(
-            vertical: defpaultPadding *1.2, horizontal:defpaultPadding),
-          ),
+              vertical: defpaultPadding * 1.2, horizontal: defpaultPadding),
         ),
-      home: const AuthScreen(),
+      ),
+
+      //here we have called the google sign in and checked if auth is successfull then proceed to next page
+      home: StreamBuilder(
+          stream: AuthMethods().authChange,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasData) {
+              return const HomeScreen();
+            }
+            return AuthScreen();
+          }),
     );
   }
 }

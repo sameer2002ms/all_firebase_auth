@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "418720993641",
+    "project_id": "all-in-one-firebase-auth",
+    "storage_bucket": "all-in-one-firebase-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418720993641:android:a8d6e63b6b015551506df8",
+        "android_client_info": {
+          "package_name": "com.example.all_firebase_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418720993641-ncsivf2k8deerdkfn07hrij01529g0st.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.all_firebase_auth",
+            "certificate_hash": "1ca56c1d715f88d9e9c83206b74a16891e990217"
+          }
+        },
+        {
+          "client_id": "418720993641-vng9i5472n15n9sd5tccqs0lh06s6fs6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8M6yHjurVao21dX4JrD_AXmX4RsuPdnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418720993641-vng9i5472n15n9sd5tccqs0lh06s6fs6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

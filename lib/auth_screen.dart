@@ -97,14 +97,14 @@ class _AuthScreenState extends State<AuthScreen>
                       child: AnimatedSwitcher(
                         duration: defaultDuration,
                         child: _ishowSignup
-                              ? SvgPicture.asset(
-                                  "assets/animation_logo.svg",
-                                  color: signup_bg,
-                                )
-                              : SvgPicture.asset(
-                                  "assets/animation_logo.svg",
-                                  color: login_bg,
-                                ),
+                            ? SvgPicture.asset(
+                                "assets/animation_logo.svg",
+                                color: signup_bg,
+                              )
+                            : SvgPicture.asset(
+                                "assets/animation_logo.svg",
+                                color: login_bg,
+                              ),
                       ),
                     ),
                   ),
@@ -117,45 +117,47 @@ class _AuthScreenState extends State<AuthScreen>
                     right: _ishowSignup ? size.width * 0.06 : size.width * 0.06,
                     child: SocalButtns()),
                 AnimatedPositioned(
+                  duration: defaultDuration,
+                  bottom:
+                      _ishowSignup ? size.height / 2 - 80 : size.height * 0.3,
+                  left: _ishowSignup ? 0 : size.width * 0.44 - 80,
+                  child: AnimatedDefaultTextStyle(
                     duration: defaultDuration,
-                    bottom: _ishowSignup ? size.height / 2 -80 : size.height * 0.3,
-                    left: _ishowSignup ? 0 : size.width * 0.44 - 80,
-                    child: AnimatedDefaultTextStyle(
-                      duration: defaultDuration,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: _ishowSignup ? 20 : 30,
-                          fontWeight: FontWeight.bold,
-                          color: _ishowSignup ? Colors.white : Colors.white70),
-                      child: Transform.rotate(
-                        angle: -_animationTextRotate.value * pi / 180,
-                        alignment: Alignment.topLeft,
-                        child: InkWell(
-                          onTap: (){
-                            if(_ishowSignup){
-                              updateView();
-                            }
-                            else{
-                              //Login
-                            }
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: defpaultPadding * 0.75),
-                            width: 160,
-                            child: Text(
-                              "Log in".toUpperCase(),
-                            ),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: _ishowSignup ? 20 : 30,
+                        fontWeight: FontWeight.bold,
+                        color: _ishowSignup ? Colors.white : Colors.white70),
+                    child: Transform.rotate(
+                      angle: -_animationTextRotate.value * pi / 180,
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                        onTap: () {
+                          if (_ishowSignup) {
+                            updateView();
+                          } else {
+                            //Login
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: defpaultPadding * 0.75),
+                          width: 160,
+                          child: Text(
+                            "Log in".toUpperCase(),
                           ),
                         ),
                       ),
                     ),
+                  ),
                 ),
                 //animation for sign Up
 
                 AnimatedPositioned(
                   duration: defaultDuration,
-                  bottom: !_ishowSignup ? size.height / 2-80 : size.height * 0.3,
-                  right: _ishowSignup ?size.width * 0.44 - 80 : 0,
+                  bottom:
+                      !_ishowSignup ? size.height / 2 - 80 : size.height * 0.3,
+                  right: _ishowSignup ? size.width * 0.44 - 80 : 0,
                   child: AnimatedDefaultTextStyle(
                     duration: defaultDuration,
                     textAlign: TextAlign.center,
@@ -164,19 +166,19 @@ class _AuthScreenState extends State<AuthScreen>
                         fontWeight: FontWeight.bold,
                         color: _ishowSignup ? Colors.white : Colors.white70),
                     child: Transform.rotate(
-                      angle: (90-_animationTextRotate.value) * pi / 180,
+                      angle: (90 - _animationTextRotate.value) * pi / 180,
                       alignment: Alignment.topRight,
                       child: InkWell(
-                        onTap: (){
-                            if(_ishowSignup){
-                              //singup
-                            }
-                            else{
-                              updateView();
-                            }
+                        onTap: () {
+                          if (_ishowSignup) {
+                            //singup
+                          } else {
+                            updateView();
+                          }
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: defpaultPadding * 0.75),
+                          padding: EdgeInsets.symmetric(
+                              vertical: defpaultPadding * 0.75),
                           width: 160,
                           child: Text(
                             "Sign Up".toUpperCase(),
@@ -186,7 +188,6 @@ class _AuthScreenState extends State<AuthScreen>
                     ),
                   ),
                 )
-
               ],
             );
           }),
