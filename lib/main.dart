@@ -1,9 +1,10 @@
-import 'package:all_firebase_auth/auth_screen.dart';
-import 'package:all_firebase_auth/constants.dart';
-import 'package:all_firebase_auth/resources/auth_method.dart';
-import 'package:all_firebase_auth/widgets/home_screen.dart';
+import 'package:all_firebase_auth/screens/auth_screen.dart';
+import 'package:all_firebase_auth/screens/home_screen.dart';
+import 'package:all_firebase_auth/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'auth methods/authentications.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
 
       //here we have called the google sign in and checked if auth is successfull then proceed to next page
       home: StreamBuilder(
-          stream: AuthMethods().authChange,
+          stream: AuthMethod().authChange,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(

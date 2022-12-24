@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import 'constants.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -19,6 +19,11 @@ class LoginForm extends StatelessWidget {
             Spacer(),
             TextFormField(
               decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(width: 3, color: signup_bg,
+                  )
+                ),
                 hintText: "Email",
               ),
             ),
@@ -27,6 +32,10 @@ class LoginForm extends StatelessWidget {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(width: 3, color:  signup_bg)
+                  ),
                   hintText: "Password",
                 ),
               ),
@@ -35,7 +44,7 @@ class LoginForm extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 "Forgot Password?",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color:  signup_bg),
               ),
             ),
             Spacer(flex: 2),

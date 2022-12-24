@@ -1,11 +1,15 @@
 import 'dart:math';
 
-import 'package:all_firebase_auth/constants.dart';
-import 'package:all_firebase_auth/widgets/login_form.dart';
-import 'package:all_firebase_auth/widgets/sign_up_form.dart';
+import 'package:all_firebase_auth/auth%20methods/authentications.dart';
+import 'package:all_firebase_auth/screens/home_screen.dart';
+import 'package:all_firebase_auth/utils/constants.dart';
+import 'package:all_firebase_auth/utils/login_form.dart';
+import 'package:all_firebase_auth/utils/sign_up_form.dart';
 import 'package:all_firebase_auth/widgets/socal_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../utils/sign_up_form.dart';
+import '../utils/util.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -16,10 +20,73 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen>
     with SingleTickerProviderStateMixin {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
   //if we want to show our sign up then we set it true
   bool _ishowSignup = false;
   late AnimationController _animationController;
   late Animation<double> _animationTextRotate;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _animationController.dispose();
+  }
+
+  void signUpUser() async {
+    // set loading to true
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethod().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    if (res == "success") {
+      setState(() {
+        _isLoading = false;
+      });
+      // navigate to the home screen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      // show the error
+      showSnackBar(context, res);
+    }
+  }
+
+  void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethod()
+        .loginUser(
+        email: _emailController.text,
+        password: _passwordController.text);
+
+    if(res == "success"){
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    }else{
+      showSnackBar(context,res);
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   void setUpAnimation() {
     _animationController =
@@ -44,11 +111,8 @@ class _AuthScreenState extends State<AuthScreen>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +147,6 @@ class _AuthScreenState extends State<AuthScreen>
                     child: SignUpForm(),
                   ),
                 ),
-
                 AnimatedPositioned(
                   duration: defaultDuration,
                   top: size.height * 0.1,
@@ -109,7 +172,6 @@ class _AuthScreenState extends State<AuthScreen>
                     ),
                   ),
                 ),
-
                 AnimatedPositioned(
                     duration: defaultDuration,
                     width: size.width,
@@ -136,7 +198,7 @@ class _AuthScreenState extends State<AuthScreen>
                           if (_ishowSignup) {
                             updateView();
                           } else {
-                            //Login
+                            loginUser();
                           }
                         },
                         child: Container(
@@ -145,6 +207,7 @@ class _AuthScreenState extends State<AuthScreen>
                           width: 160,
                           child: Text(
                             "Log in".toUpperCase(),
+                            style: TextStyle(color:  signup_bg),
                           ),
                         ),
                       ),
@@ -171,7 +234,7 @@ class _AuthScreenState extends State<AuthScreen>
                       child: InkWell(
                         onTap: () {
                           if (_ishowSignup) {
-                            //singup
+                            signUpUser();
                           } else {
                             updateView();
                           }
@@ -180,8 +243,16 @@ class _AuthScreenState extends State<AuthScreen>
                           padding: EdgeInsets.symmetric(
                               vertical: defpaultPadding * 0.75),
                           width: 160,
-                          child: Text(
-                            "Sign Up".toUpperCase(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              "Sign Up".toUpperCase(),
+                              style: TextStyle(color:  login_bg,
+
+                              ),
+                            ),
                           ),
                         ),
                       ),

@@ -1,7 +1,7 @@
-import 'package:all_firebase_auth/widgets/home_screen.dart';
+import 'package:all_firebase_auth/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../resources/auth_method.dart';
+import '../auth methods/authentications.dart';
 
 class SocalButtns extends StatefulWidget {
   const SocalButtns({
@@ -13,13 +13,14 @@ class SocalButtns extends StatefulWidget {
 }
 
 class _SocalButtnsState extends State<SocalButtns> {
-  final AuthMethods _authMethods = AuthMethods();
+  final AuthMethod _authMethods = AuthMethod();
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        IconButton(onPressed: () {}, icon: Image.asset("assets/telephone.png")),
         IconButton(onPressed: () {}, icon: Image.asset("assets/fb.png")),
         IconButton(onPressed: () {}, icon: Image.asset("assets/linkedin.png")),
         IconButton(
@@ -32,7 +33,7 @@ class _SocalButtnsState extends State<SocalButtns> {
                 );
               }
             },
-            icon: Image.asset("assets/twitter.png")),
+            icon: Image.asset("assets/search.png")),
       ],
     );
   }
